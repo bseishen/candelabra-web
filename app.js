@@ -1,6 +1,7 @@
 // Candelabra WebDFU — application logic using devanlai/webdfu library
 
 const REPO = "bseishen/Candelabra";
+const PAGES_BASE = "https://bseishen.github.io/candelabra-web";
 const FLASH_START = 0x08000000;
 
 const USB_FILTERS_DEVICE = [
@@ -445,15 +446,15 @@ async function flashFirmware() {
             firmware = manualFirmware;
             log("Using uploaded file (" + firmware.byteLength + " bytes)");
         } else {
+            var tag = document.getElementById("release-select").value;
+            var binUrl = PAGES_BASE + "/firmware/" + tag + "/" + asset.name;
             log("Downloading " + asset.name + "...");
             try {
-                var resp = await fetch(asset.url, {
-                    headers: { "Accept": "application/octet-stream" }
-                });
+                var resp = await fetch(binUrl);
                 if (!resp.ok) throw new Error("HTTP " + resp.status);
                 firmware = await resp.arrayBuffer();
             } catch (fetchErr) {
-                log("Cannot download from GitHub (CORS). Please use 'Upload .bin file' instead.", "error");
+                log("Cannot download firmware. Please use 'Upload .bin file' instead.", "error");
                 log("Download the .bin from: " + asset.browser_download_url, "warn");
                 document.getElementById("btn-flash").disabled = false;
                 return;
