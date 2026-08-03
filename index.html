@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Candelabra WebDFU</title>
+<title>Candelabra Web</title>
 <style>
   :root {
     --bg: #0f1117;
@@ -114,7 +114,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>Candelabra WebDFU</h1>
+  <h1>Candelabra Web</h1>
   <p class="subtitle">Browser-based firmware flasher for Candelabra CAN adapters</p>
 
   <!-- Step 1: Select Firmware -->
@@ -193,9 +193,8 @@
   </div>
 
   <p class="note">
-    Requires Chrome or Edge. Must be served over HTTPS or localhost (file:// won't work).<br>
-    To run locally: <code style="background:var(--card);padding:.15rem .4rem;border-radius:3px">./serve.sh</code>
-    then open <code style="background:var(--card);padding:.15rem .4rem;border-radius:3px">http://localhost:8080</code><br>
+    Works with Chrome, Edge, Opera, and other Chromium-based browsers (requires WebUSB).<br>
+    Must be served over HTTPS (file:// won't work).<br>
     Firmware releases from
     <a href="https://github.com/bseishen/Candelabra/releases" target="_blank">github.com/bseishen/Candelabra</a>
   </p>
