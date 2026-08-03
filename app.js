@@ -447,8 +447,9 @@ async function flashFirmware() {
         } else {
             log("Downloading " + asset.name + "...");
             try {
-                // Try direct fetch (works when hosted on same origin or with CORS)
-                var resp = await fetch(asset.browser_download_url);
+                var resp = await fetch(asset.url, {
+                    headers: { "Accept": "application/octet-stream" }
+                });
                 if (!resp.ok) throw new Error("HTTP " + resp.status);
                 firmware = await resp.arrayBuffer();
             } catch (fetchErr) {
