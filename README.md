@@ -34,14 +34,6 @@ Browser-based DFU firmware flasher for Candelabra CAN adapters.
 3. Connect your device in DFU mode
 4. Click **Connect** and then **Flash**
 
-## Local Development
-
-```bash
-./serve.sh
-```
-
-Serves the app at `http://localhost:8080`. Requires Python 3.
-
 ## Related
 
 - [Candelabra Firmware](https://github.com/bseishen/Candelabra) — firmware source and releases
