@@ -184,6 +184,28 @@ function populateAssets() {
         bSel.appendChild(opt);
     });
 
+    populateMCUs();
+}
+
+function populateMCUs() {
+    var release = getSelectedRelease();
+    var assets = getBinAssets(release);
+    var board = document.getElementById("board-select").value;
+    var mcus = new Map();
+    assets.forEach(function(a) {
+        var p = parseAssetName(a.name);
+        if (p && p.board === board) mcus.set(p.mcu, true);
+    });
+
+    var mSel = document.getElementById("mcu-select");
+    mSel.innerHTML = "";
+    mcus.forEach(function(_, mcu) {
+        var opt = document.createElement("option");
+        opt.value = mcu;
+        opt.textContent = mcu;
+        mSel.appendChild(opt);
+    });
+
     populateFirmwareTypes();
 }
 
@@ -191,10 +213,11 @@ function populateFirmwareTypes() {
     var release = getSelectedRelease();
     var assets = getBinAssets(release);
     var board = document.getElementById("board-select").value;
+    var mcu = document.getElementById("mcu-select").value;
     var types = new Map();
     assets.forEach(function(a) {
         var p = parseAssetName(a.name);
-        if (p && p.board === board) types.set(p.firmware, true);
+        if (p && p.board === board && p.mcu === mcu) types.set(p.firmware, true);
     });
 
     var fSel = document.getElementById("firmware-select");
@@ -211,24 +234,26 @@ function populateFirmwareTypes() {
 
 function updateSelectedFile() {
     var board = document.getElementById("board-select").value;
+    var mcu = document.getElementById("mcu-select").value;
     var fw = document.getElementById("firmware-select").value;
     var release = getSelectedRelease();
     var assets = getBinAssets(release);
     var match = assets.find(function(a) {
         var p = parseAssetName(a.name);
-        return p && p.board === board && p.firmware === fw;
+        return p && p.board === board && p.mcu === mcu && p.firmware === fw;
     });
     document.getElementById("selected-file").textContent = match ? match.name : "No matching firmware found";
 }
 
 function getSelectedAsset() {
     var board = document.getElementById("board-select").value;
+    var mcu = document.getElementById("mcu-select").value;
     var fw = document.getElementById("firmware-select").value;
     var release = getSelectedRelease();
     var assets = getBinAssets(release);
     return assets.find(function(a) {
         var p = parseAssetName(a.name);
-        return p && p.board === board && p.firmware === fw;
+        return p && p.board === board && p.mcu === mcu && p.firmware === fw;
     });
 }
 
@@ -598,7 +623,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.getElementById("release-select").addEventListener("change", populateAssets);
-    document.getElementById("board-select").addEventListener("change", populateFirmwareTypes);
+    document.getElementById("board-select").addEventListener("change", populateMCUs);
+    document.getElementById("mcu-select").addEventListener("change", populateFirmwareTypes);
     document.getElementById("firmware-select").addEventListener("change", updateSelectedFile);
     document.getElementById("btn-enter-dfu").addEventListener("click", enterDFUMode);
     document.getElementById("btn-connect-dfu").addEventListener("click", connectDFU);
