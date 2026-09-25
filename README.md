@@ -15,6 +15,7 @@ Browser-based DFU firmware flasher for Candelabra CAN adapters.
 | Board | MCU |
 |-------|-----|
 | Multiboard (MKS Makerbase, Walfront, DSD Tech, etc.) | STM32G431 |
+| Multiboard (Walfront) | STM32G473 |
 | Jhoinrch | STM32G431 |
 | OpenlightLabs | STM32G431 |
 | OleksiiSolo | STM32G431 |
@@ -23,7 +24,7 @@ Browser-based DFU firmware flasher for Candelabra CAN adapters.
 | WeActStudioV2 | STM32G431 |
 | BigTreeTechU2C | STM32G0B1 |
 
-**Multiboard** refers to the numerous generic STM32G431 CANable clones from various manufacturers that share the same pinout and PCB layout. If your adapter is an unbranded or budget STM32G431 CANable clone, Multiboard is likely the correct target.
+**Multiboard** refers to the numerous generic CANable clones from various manufacturers (MKS Makerbase, Walfront, DSD Tech, and others) that share the same pinout and PCB layout. If your adapter is an unbranded or budget STM32G431 or STM32G473 CANable clone, Multiboard is likely the correct target.
 
 ## Firmware Types
 
